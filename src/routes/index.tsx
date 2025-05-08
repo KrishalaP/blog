@@ -1,10 +1,7 @@
-import Blog from '@/components/pages/blog'
+import MoviesPage from '@/components/pages/movie'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
-  component: Blog,
-  // Hello Monday
-  // jasjsklankasas
-  // jakhas
-  // I am girl
+  component: MoviesPage,
+  
 })

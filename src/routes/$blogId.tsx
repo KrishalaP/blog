@@ -1,74 +1,57 @@
-import { createFileRoute } from '@tanstack/react-router'
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from '@tanstack/react-query'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-} from '@/components/ui/card'
+// import { useParams } from "@tanstack/react-router";
+// import { useQuery } from "@tanstack/react-query";
 
-export const Route = createFileRoute('/$blogId')({
-  component: OneBlog,
-})
-                                       
-export default function OneBlog() {
-  const queryClient = new QueryClient()
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Blog />
-    </QueryClientProvider>
-  )
-}
+// type MovieDetails = {
+//   id: number;
+//   title: string;
+//   overview: string;
+//   release_date: string;
+//   poster_path: string | null;
+//   runtime: number;
+//   vote_average: number;
+// };
 
-function Blog() {
-  const { blogId } = Route.useParams()
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['OneData'],
-    queryFn: () =>
-      fetch(`https://jsonplaceholder.typicode.com/posts/${blogId}`).then(
-        (res) => res.json(),
-      ),
-  })
+// export default function MovieDetailPage() {
+//   const { movieId } = useParams({ strict: false });
 
-  if (isLoading) return <div className="text-center">Loading...</div>
+//   const { data, isLoading, error } = useQuery<MovieDetails>({
+//     queryKey: ["movie", movieId],
+//     queryFn: () =>
+//       fetch(
+//         `https://api.themoviedb.org/3/movie/${movieId}?api_key=cc68c78ed49f7326fd9adc7dc8932d3f`
+//       ).then((res) => res.json()),
+//   });
 
-  if (error)
-    return (
-      <div className="text-center text-red-500">
-        An error has taken place: {(error as Error).message}
-      </div>
-    )
+//   if (isLoading) return <div className="text-center">Loading...</div>;
+//   if (error)
+//     return (
+//       <div className="text-center text-red-500">
+//         Error: {(error as Error).message}
+//       </div>
+//     );
 
-    
-  return (
-    <div className="min-h-screen bg-slate-200 flex flex-col items-center p-6">
-      <Card
-        key={data.id}
-        className="w-[95%] mx-w-xl max-w-4xl bg-white shadow-xl flex flex-col border-solid	border-stone-500	 mt-10	 rounded-lg p-8  h-[80vh]"
-      >
-        <CardHeader>
-          <h2 className="text-2xl font-bold text-green-500	 ">
-            User ID: &nbsp; {data.userId}
-          </h2>
-          <CardDescription>
-            <h3 className="text-2xl text-amber-500 font-semibold ">
-              ID: &nbsp; {data.id}
-            </h3>
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="mt-2">
-          <h4 className="text-xl text-teal-600 font-semibold p-2">
-            Title: {data.title}
-          </h4>
-          <p className="text-md leading-7 tracking-widest max-w-md	text-red-500 font-normal line-clamp-3 p-2">
-            Body: {data.body}
-          </p>
-        </CardContent>
-      </Card>
-    </div>
-  )
-}
+//   return (
+//     <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow">
+//       <h1 className="text-2xl font-bold mb-4 text-rose-600">{data.title}</h1>
+//       <img
+//         src={
+//           data.poster_path
+//             ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
+//             : "/fallback-image.jpg"
+//         }
+//         alt={data.title}
+//         className="w-full max-w-md mx-auto rounded mb-4"
+//       />
+//       <p className="text-gray-700 mb-2">
+//         <strong>Release Date:</strong> {data.release_date}
+//       </p>
+//       <p className="text-gray-700 mb-2">
+//         <strong>Runtime:</strong> {data.runtime} mins
+//       </p>
+//       <p className="text-gray-700 mb-2">
+//         <strong>Rating:</strong> {data.vote_average}/10
+//       </p>
+//       <p className="text-gray-700 mt-4">{data.overview}</p>
+//     </div>
+//   );
+// }
